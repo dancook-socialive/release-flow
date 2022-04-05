@@ -25,7 +25,7 @@ jobs:
           path: artifacts/
       
       - name: debug
-        run: echo "name=${{inputs.version}}\ntag=${{inputs.tag}}\nbody=${{inputs.changelog}}"
+        run: echo "name=${{inputs.new-version}}\ntag=${{inputs.tag-name}}\nbody=${{inputs.changeLog}}"
 
       - name: Release
         uses: softprops/action-gh-release@v1
