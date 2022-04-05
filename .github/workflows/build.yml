@@ -1,0 +1,32 @@
+name: Build
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+          cache: yarn
+      
+      - name: Install dependencies
+        run: yarn install
+      
+      - name: Conventional Changelog Action
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          preset: "angular"
+          release-count: "10"
+          git-push: false
+      
+      - name: Build
+        run: yarn run build
+
+      - name: package
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: |
+            ./dist
