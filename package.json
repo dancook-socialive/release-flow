@@ -1,0 +1,10 @@
+{
+  "name": "release-flow",
+  "version": "1.0.0",
+  "description": "Example release flow",
+  "main": "index.js",
+  "repository": "git@github.com:dancook-socialive/release-flow.git",
+  "author": "Dan Cook <93783090+dancook-socialive@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true
+}
