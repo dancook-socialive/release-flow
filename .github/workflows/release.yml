@@ -1,0 +1,34 @@
+name: Release
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      changelog:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download deployment package
+        uses: actions/download-artifact@v2
+        with:
+          name: package
+          path: artifacts/
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{inputs.changelog}}
+          prerelease: true
+          name: ${{inputs.version}}
+          tag_name: ${{inputs.tag}}
+          files: artifacts/
