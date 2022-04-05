@@ -33,5 +33,5 @@ jobs:
           body: ${{inputs.changelog}}
           prerelease: true
           name: ${{inputs.version}}
-          tag_name: ${{inputs.tag}}
+          tag_name: refs/tags/${{inputs.tag}}
           files: artifacts/
