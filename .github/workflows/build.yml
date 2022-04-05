@@ -1,6 +1,16 @@
 name: Build
 on:
   workflow_call:
+    outputs:
+      tag-name:
+        description: "The genreated tag name"
+        value: ${{ jobs.build.outputs.tag-name }}
+      new-version:
+        description: "The genreated version"
+        value: ${{ jobs.build.outputs.new-version }}
+      changeLog:
+        description: "The genreated version"
+        value: ${{ jobs.build.outputs.changeLog }}
 jobs:
   build:
     runs-on: ubuntu-latest
