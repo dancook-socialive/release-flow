@@ -15,6 +15,6 @@ jobs:
     needs: build
     uses: ./.github/workflows/release.yml
     with:
-      tag: ${{needs.build.outputs.tag}}
-      version: ${{needs.build.outputs.version}}
-      changelog: ${{needs.build.outputs.changelog}}
+      tag-name: ${{needs.build.outputs.tag-name}}
+      new-version: ${{needs.build.outputs.new-version}}
+      changelog: ${{needs.build.outputs.changeLog}}

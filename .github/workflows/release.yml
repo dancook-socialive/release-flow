@@ -2,13 +2,13 @@ name: Release
 on:
   workflow_call:
     inputs:
-      tag:
+      tag-name:
         required: true
         type: string
-      version:
+      new-version:
         required: true
         type: string
-      changelog:
+      changeLog:
         required: true
         type: string
 
@@ -30,8 +30,8 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body: ${{inputs.changelog}}
+          body: ${{inputs.changeLog}}
           prerelease: true
-          name: ${{inputs.version}}
-          tag_name: refs/tags/${{inputs.tag}}
-          files: artifacts/
+          name: ${{inputs.new-version}}
+          tag_name: refs/tags/${{inputs.tag-name}}
+          files: artifacts/*

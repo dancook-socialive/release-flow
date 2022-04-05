@@ -5,8 +5,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.generate-version.outputs.tag }}
-      version: ${{ steps.generate-version.outputs.version }}
+      tag-name: ${{ steps.generate-version.outputs.tag }}
+      new-version: ${{ steps.generate-version.outputs.version }}
       changeLog: ${{ steps.generate-version.outputs.clean_changelog }}
     steps:
       - uses: actions/checkout@v3
