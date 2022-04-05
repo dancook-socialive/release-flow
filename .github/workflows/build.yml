@@ -28,6 +28,7 @@ jobs:
         with:
           preset: "angular"
           release-count: "10"
+          skip-commit: true
 
       - name: package
         uses: actions/upload-artifact@v2
