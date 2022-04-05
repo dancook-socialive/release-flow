@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+      branches:
+        - main
+  pull_request:
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  release:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    uses: ./.github/workflows/release.yml
+    with:
+      tag: ${{needs.build.outputs.tag}}
+      version: ${{needs.build.outputs.version}}
+      changelog: ${{needs.build.outputs.changelog}}
