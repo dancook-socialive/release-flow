@@ -46,3 +46,28 @@ jobs:
           name: package
           path: |
             ./dist
+
+  release:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download deployment package
+        uses: actions/download-artifact@v2
+        with:
+          name: package
+          path: artifacts/
+      
+      - name: debug
+        run: echo "name=${{needs.build.outputs.new-version}}\ntag=${{needs.build.outputs.tag-name}}\nbody=${{needs.build.outputs.changeLog}}"
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{needs.build.outputs.changeLog}}
+          prerelease: true
+          name: ${{needs.build.outputs.new-version}}
+          tag_name: refs/tags/${{needs.build.outputs.tag-name}}
+          files: artifacts/*

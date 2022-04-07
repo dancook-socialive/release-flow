@@ -9,12 +9,3 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/build.yml
-
-  release:
-    if: github.ref == 'refs/heads/main'
-    needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      tag-name: ${{needs.build.outputs.tag-name}}
-      new-version: ${{needs.build.outputs.new-version}}
-      changelog: ${{needs.build.outputs.changeLog}}
