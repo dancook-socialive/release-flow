@@ -1,37 +1,25 @@
 name: Release
 on:
-  workflow_call:
-    inputs:
-      tag-name:
-        required: true
-        type: string
-      new-version:
-        required: true
-        type: string
-      changeLog:
-        required: true
-        type: string
+  release:
+    types: [published]
 
 jobs:
-  release:
+  debug:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Download deployment package
-        uses: actions/download-artifact@v2
-        with:
-          name: package
-          path: artifacts/
-      
-      - name: debug
-        run: echo "name=${{inputs.new-version}}\ntag=${{inputs.tag-name}}\nbody=${{inputs.changeLog}}"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+  release-sandbox:
+    if: github.event_name == 'prerelease'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "magically deploy to sandbox"
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          body: ${{inputs.changeLog}}
-          prerelease: true
-          name: ${{inputs.new-version}}
-          tag_name: refs/tags/${{inputs.tag-name}}
-          files: artifacts/*
+  release-prod:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "magically deploy to prod"
