@@ -64,7 +64,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@4de103f8387daf5dc810c4b3f29a610bee7aafe3
         with:
-          token: ${{ secrets.RELEASE_FAKE }}
+          token: ${{ secrets.RELEASE_TOKEN }}
           body: ${{needs.build.outputs.changeLog}}
           prerelease: true
           name: ${{needs.build.outputs.new-version}}
