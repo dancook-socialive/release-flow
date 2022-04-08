@@ -64,9 +64,9 @@ jobs:
 
       - name: Create release
         run: |
-          gh auth login --with-token < "$GH_TOKEN"
+          gh auth login
         env: 
-          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GGH_TOKEN: $
 
       # - name: Create Release
       #   uses: softprops/action-gh-release@4de103f8387daf5dc810c4b3f29a610bee7aafe3
