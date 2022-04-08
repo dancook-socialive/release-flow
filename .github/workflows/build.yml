@@ -61,8 +61,10 @@ jobs:
       - name: debug
         run: echo "name=${{needs.build.outputs.new-version}}\ntag=${{needs.build.outputs.tag-name}}\nbody=${{needs.build.outputs.changeLog}}"
 
-      - name: Enable auto-merge for new PRs
-        run: gh release create ${{needs.build.outputs.tag-name}} -p -n "${{needs.build.outputs.changeLog}}" ./artifacts/*
+      - name: Create release
+        run: |
+          gh auth login
+          gh release create "${{needs.build.outputs.tag-name}}" -p -n "${{needs.build.outputs.changeLog}}" ./artifacts/*
         env: 
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
