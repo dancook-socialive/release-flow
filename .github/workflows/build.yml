@@ -65,7 +65,6 @@ jobs:
       - name: Create release
         run: |
           gh auth login --with-token < "$GH_TOKEN"
-          gh release create "${{needs.build.outputs.tag-name}}" -p
         env: 
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
