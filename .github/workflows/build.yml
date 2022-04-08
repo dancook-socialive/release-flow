@@ -64,10 +64,9 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.RELEASE_TOKEN }}
           body: ${{needs.build.outputs.changeLog}}
           prerelease: true
           name: ${{needs.build.outputs.new-version}}
           tag_name: refs/tags/${{needs.build.outputs.tag-name}}
           files: artifacts/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
