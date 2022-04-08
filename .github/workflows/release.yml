@@ -1,6 +1,7 @@
 name: Release
 on:
   release:
+    types: [published]
 
 jobs:
   debug:
@@ -12,13 +13,13 @@ jobs:
         run: |
           echo "$GITHUB_CONTEXT"
   release-sandbox:
-    if: github.event_name == 'prerelease'
+    if: github.event.release.prerelease
     runs-on: ubuntu-latest
     steps:
       - run: echo "magically deploy to sandbox"
 
   release-prod:
-    if: github.event_name == 'release'
+    if: (!github.event.release.release)
     runs-on: ubuntu-latest
     steps:
       - run: echo "magically deploy to prod"
