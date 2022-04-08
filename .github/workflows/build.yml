@@ -69,5 +69,4 @@ jobs:
           name: ${{needs.build.outputs.new-version}}
           tag_name: refs/tags/${{needs.build.outputs.tag-name}}
           files: artifacts/*
-        env:
-          GITHUB_TOKEN: ${{secrets.RELEASE_TOKEN}}
+          token: ${{secrets.RELEASE_TOKEN}}
