@@ -61,14 +61,19 @@ jobs:
       - name: debug
         run: echo "name=${{needs.build.outputs.new-version}}\ntag=${{needs.build.outputs.tag-name}}\nbody=${{needs.build.outputs.changeLog}}"
 
-      - name: Create Release
-        uses: softprops/action-gh-release@4de103f8387daf5dc810c4b3f29a610bee7aafe3
-        env:
+      - name: Enable auto-merge for new PRs
+        run: gh release create ${{needs.build.outputs.tag-name}} -p -n "${{needs.build.outputs.changeLog}}" ./artifacts/*
+        env: 
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        with:
-          token: ${{ secrets.RELEASE_TOKEN }}
-          body: ${{needs.build.outputs.changeLog}}
-          prerelease: true
-          name: ${{needs.build.outputs.new-version}}
-          tag_name: refs/tags/${{needs.build.outputs.tag-name}}
-          files: artifacts/*
+
+      # - name: Create Release
+      #   uses: softprops/action-gh-release@4de103f8387daf5dc810c4b3f29a610bee7aafe3
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      #   with:
+      #     token: ${{ secrets.RELEASE_TOKEN }}
+      #     body: ${{needs.build.outputs.changeLog}}
+      #     prerelease: true
+      #     name: ${{needs.build.outputs.new-version}}
+      #     tag_name: refs/tags/${{needs.build.outputs.tag-name}}
+      #     files: artifacts/*
