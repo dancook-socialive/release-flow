@@ -9,6 +9,3 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/build.yml
-    
-  deploy:
-    uses: ./.github/workflows/release.yml
