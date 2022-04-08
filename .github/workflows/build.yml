@@ -51,8 +51,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Download deployment package
         uses: actions/download-artifact@v2
@@ -71,3 +69,4 @@ jobs:
           name: ${{needs.build.outputs.new-version}}
           tag_name: refs/tags/${{needs.build.outputs.tag-name}}
           files: artifacts/*
+          token: ${{secrets.RELEASE_TOKEN}}
