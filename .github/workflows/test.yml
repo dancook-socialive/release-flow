@@ -8,8 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Conventional Changelog Action
+        if: github.ref == 'refs/heads/main'
+        id: generate-version
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          preset: "angular"
+          release-count: "10"
+          skip-commit: true
+
       - name: Create release
         run: |
-          gh release create "${{needs.build.outputs.tag-name}}" -p
+          gh release create "${{ steps.generate-version.outputs.tag }}" -p
         env: 
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
