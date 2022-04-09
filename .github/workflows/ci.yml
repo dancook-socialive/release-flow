@@ -6,4 +6,43 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+          cache: yarn
+      
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Conventional Changelog Action
+        if: github.ref == 'refs/heads/main'
+        id: generate-version
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          preset: "angular"
+          release-count: "10"
+          skip-commit: true
+
+      - name: Build
+        run: yarn run build
+
+      - name: package
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: |
+            ./dist
+
+      - name: Create release
+        if: github.ref == 'refs/heads/main'
+        run: |
+          gh release create "$TAG" -p
+        env: 
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          TAG: ${{ steps.generate-version.outputs.tag }}
