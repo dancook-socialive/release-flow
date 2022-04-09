@@ -24,6 +24,7 @@ jobs:
         id: generate-version
         uses: TriPSs/conventional-changelog-action@v3
         with:
+          github-token: ${{ secrets.github_token }}
           preset: "angular"
           release-count: "10"
           skip-commit: true
