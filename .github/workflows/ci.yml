@@ -28,6 +28,8 @@ jobs:
           preset: "angular"
           release-count: "10"
           skip-commit: true
+          version-file: "./package.json"
+          version-path: 'version'
 
       - name: Build
         run: yarn run build
