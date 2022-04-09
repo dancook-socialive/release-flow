@@ -61,7 +61,7 @@ jobs:
           gh release create "$TAG" -p
         env: 
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          TAG: ${{needs.build.outputs.tag-name}}
+          TAG: ${{ steps.generate-version.outputs.tag }}
 
       # - name: Create Release
       #   uses: softprops/action-gh-release@4de103f8387daf5dc810c4b3f29a610bee7aafe3
