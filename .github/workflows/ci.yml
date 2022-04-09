@@ -42,7 +42,8 @@ jobs:
       - name: Create release
         if: github.ref == 'refs/heads/main'
         run: |
-          gh release create "$TAG" -p
+          gh release create "$TAG" -p -n "$CHANGELOG" ./dist/*
         env: 
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           TAG: ${{ steps.generate-version.outputs.tag }}
+          CHANGELOG: ${{ steps.generate-version.outputs.clean_changelog }}
