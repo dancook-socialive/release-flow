@@ -30,7 +30,7 @@ jobs:
         with:
           preset: "angular"
           release-count: "10"
-          git-push: false
+          skip-commit: true
           version-file: "./dist/package.json"
           output-file: './dist/CHANGELOG.md'
 
