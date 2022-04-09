@@ -19,6 +19,7 @@ jobs:
 
       - name: Create release
         run: |
-          gh release create "${{ steps.generate-version.outputs.tag }}" -p
+          gh release create "$TAG" -p
         env: 
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          TAG: ${{ steps.generate-version.outputs.tag }}
