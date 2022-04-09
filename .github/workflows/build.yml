@@ -53,14 +53,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Download deployment package
-        uses: actions/download-artifact@v2
         with:
-          name: package
-          path: artifacts/
-      
-      - name: debug
-        run: echo "name=${{needs.build.outputs.new-version}}\ntag=${{needs.build.outputs.tag-name}}\nbody=${{needs.build.outputs.changeLog}}"
+          fetch-depth: 0
 
       - name: Create release
         run: |
