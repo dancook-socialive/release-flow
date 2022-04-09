@@ -27,7 +27,7 @@ jobs:
           preset: "angular"
           release-count: "10"
           skip-commit: true
-          skip-version-file: true
+          skip-version-file: false
           skip-git-pull: true
 
       - name: Build
