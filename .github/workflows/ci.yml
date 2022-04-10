@@ -43,7 +43,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           git tag -d "$TAG"
-          git tag "$TAG" "$github.sha"
+          git tag "$TAG" "${{github.sha}}"
           git push origin "$TAG"
         env:
           TAG: ${{ steps.generate-version.outputs.tag }}
