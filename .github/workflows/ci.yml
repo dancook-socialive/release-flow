@@ -27,14 +27,18 @@ jobs:
           github-token: ${{ secrets.github_token }}
           preset: "angular"
           release-count: "10"
-          skip-commit: true
-          skip-version-file: false
-          skip-git-pull: true
-          version-file: "./version.json"
-          output-file: "false"
+          skip-push: true
 
       - name: Build
         run: yarn run build
+
+      - name: Create tag
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git tag "$TAG"
+          git push origin "$TAG"
+        env:
+          TAG: ${{ steps.generate-version.outputs.tag }}
 
       - name: Create release
         if: github.ref == 'refs/heads/main'
