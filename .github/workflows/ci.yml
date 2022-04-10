@@ -27,7 +27,6 @@ jobs:
           preset: "angular"
           release-count: "10"
           git-push: false
-          skip-commit: true
 
       - name: Build
         run: yarn run build
