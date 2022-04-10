@@ -27,13 +27,22 @@ jobs:
           preset: "angular"
           release-count: "10"
           git-push: false
+          skip-commit: true
+
+      - name: apply version
+        run: |
+          sed -i 's/"version": ".*",/"version": "${{ env.VERSION }}",/' ./package.json
+          cat ./package.json
+        env:
+          VERSION: ${{ steps.generate-version.outputs.version }}
 
       - name: Build
         run: yarn run build
 
-      - name: Push tag
+      - name: Create tag
         if: github.ref == 'refs/heads/main'
         run: |
+          git tag "$TAG"
           git push origin "$TAG"
         env:
           TAG: ${{ steps.generate-version.outputs.tag }}
