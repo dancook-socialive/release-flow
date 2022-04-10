@@ -27,14 +27,14 @@ jobs:
           preset: "angular"
           release-count: "10"
           git-push: false
+          skip-commit: true
 
       - name: Build
         run: yarn run build
 
-      - name: Create tag
+      - name: Push tag
         if: github.ref == 'refs/heads/main'
         run: |
-          git tag "$TAG"
           git push origin "$TAG"
         env:
           TAG: ${{ steps.generate-version.outputs.tag }}
