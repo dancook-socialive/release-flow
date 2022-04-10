@@ -20,7 +20,6 @@ jobs:
         run: yarn install
 
       - name: Conventional Changelog Action
-        if: github.ref == 'refs/heads/main'
         id: generate-version
         uses: TriPSs/conventional-changelog-action@v3
         with:
