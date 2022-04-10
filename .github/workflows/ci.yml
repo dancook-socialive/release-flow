@@ -29,7 +29,6 @@ jobs:
           skip-commit: true
           skip-on-empty: false
 
-
       - name: apply version
         run: |
           sed -i 's/"version": ".*",/"version": "${{ env.VERSION }}",/' ./package.json
