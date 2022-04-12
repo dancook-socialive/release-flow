@@ -39,10 +39,10 @@ jobs:
           skip-on-empty: true
 
       - name: apply version
-        if: (!${{ steps.generate-version.outputs.skipped }})
+        if: (!steps.generate-version.outputs.skipped)
         run: |
           sed -i 's/"version": ".*",/"version": "${{ env.VERSION }}",/' ./package.json
-          sed -i 's/"version": ".*",/"version": "${{ env.VERSION }}",/' ./app/packlage.json
+          sed -i 's/"version": ".*",/"version": "${{ env.VERSION }}",/' ./app/package.json
         env:
           VERSION: ${{ steps.generate-version.outputs.version }}
 
