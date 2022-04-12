@@ -7,7 +7,7 @@ on:
         value: ${{jobs.build.outputs.version}}
       versionExists: 
         description: "If this run should create a new version"
-        value: ${{jobs.build.outputs.skipped}}
+        value: ${{jobs.build.outputs.versionExists}}
 
 jobs:
   build:
