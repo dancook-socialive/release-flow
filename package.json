@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "mkdir ./dist && find ./ -maxdepth 1 -type f | xargs -I {} cp {} ./dist",
+    "build": "mkdir -p ./dist/app &&  find ./ -maxdepth 1 -type f | xargs -I {} cp {} ./dist &&  find ./app -maxdepth 1 -type f | xargs -I {} cp {} ./dist/app",
     "prebuild": "yarn run clean",
     "clean": "rm -rf ./dist"
   }

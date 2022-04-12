@@ -33,6 +33,7 @@ jobs:
           git-push: false
           skip-commit: true
           skip-on-empty: false
+          version-file: ./package.json,./app.packlage.json
 
       - name: apply version
         run: |
