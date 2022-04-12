@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.generate-version.outputs.version }}
+      versionExists: ${{ steps.generate-version.outputs.skipped }}
     steps:
       - uses: actions/checkout@v3
         with:
