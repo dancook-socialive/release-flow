@@ -33,7 +33,7 @@ jobs:
       - name: Create release
         if: github.ref == 'refs/heads/main'
         run: |
-          find ./artifacts/package -type f | xargs -I {} gh release create "$TAG" -p -n "$CHANGELOG" {}
+          gh release create "$TAG" -p -n "$CHANGELOG" (find ./artifacts/package -type f)
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           TAG: ${{ needs.build.outputs.version}}
