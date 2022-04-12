@@ -27,7 +27,7 @@ jobs:
           git tag "$TAG" "${{github.sha}}"
           git push origin "$TAG"
         env:
-          TAG: ${{ steps.generate-version.outputs.tag }}
+          TAG: ${{ needs.build.outputs.version}}
 
       - name: Create release
         if: github.ref == 'refs/heads/main'
@@ -35,5 +35,5 @@ jobs:
           gh release create "$TAG" -p -n "$CHANGELOG" ./artifacts/*
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          TAG: ${{ steps.generate-version.outputs.tag }}
+          TAG: ${{ needs.build.outputs.version}}
           CHANGELOG: ${{ steps.generate-version.outputs.clean_changelog }}
