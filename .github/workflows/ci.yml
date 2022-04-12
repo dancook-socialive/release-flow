@@ -28,7 +28,7 @@ jobs:
           git tag "$TAG" "${{github.sha}}"
           git push origin "$TAG"
         env:
-          TAG: ${{ needs.build.outputs.version}}
+          TAG: "v${{ needs.build.outputs.version}}"
 
       - name: Create release
         if: github.ref == 'refs/heads/main'
