@@ -52,7 +52,5 @@ jobs:
       - name: Package artifact
         uses: actions/upload-artifact@v2
         with:
-          name: package-${{ env.VERSION }}
+          name: package
           path: ./dist
-        env:
-          VERSION: ${{ steps.generate-version.outputs.version }}
