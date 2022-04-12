@@ -5,16 +5,16 @@ on:
       version:
         description: "Calculated version of the build"
         value: ${{jobs.build.outputs.version}}
-      versionExists: 
-        description: "If this run should create a new version"
-        value: ${{jobs.build.outputs.versionExists}}
+      skippedVersionCreation: 
+        description: "If a new version was not created"
+        value: ${{jobs.build.outputs.skippedVersionCreation}}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.generate-version.outputs.version }}
-      versionExists: (${{steps.generate-version.outputs.skipped}} == 'false')
+      skippedVersionCreation: ${{steps.generate-version.outputs.skipped}}
     steps:
       - uses: actions/checkout@v3
         with:
