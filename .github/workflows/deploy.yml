@@ -1,0 +1,17 @@
+name: Deploy
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy-sandbox:
+    if: github.event.release.prerelease
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "magically deploy to sandbox"
+
+  deploy-prod:
+    if: (!github.event.release.prerelease)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "magically deploy to prod"

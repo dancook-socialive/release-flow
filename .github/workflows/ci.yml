@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts/
+
+      - name: Create tag
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git tag -d "$TAG"
+          git tag "$TAG" "${{github.sha}}"
+          git push origin "$TAG"
+        env:
+          TAG: ${{ steps.generate-version.outputs.tag }}
+
+      - name: Create release
+        if: github.ref == 'refs/heads/main'
+        run: |
+          gh release create "$TAG" -p -n "$CHANGELOG" ./artifacts/*
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          TAG: ${{ steps.generate-version.outputs.tag }}
+          CHANGELOG: ${{ steps.generate-version.outputs.clean_changelog }}
