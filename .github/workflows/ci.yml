@@ -11,7 +11,7 @@ jobs:
 
   package:
     needs: build
-    if: (!needs.build.outputs.versionExists)
+    if: (needs.build.outputs.versionExists == 'true')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
