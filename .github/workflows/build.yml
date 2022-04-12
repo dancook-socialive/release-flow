@@ -1,6 +1,10 @@
 name: Build
 on:
   workflow_call:
+    outputs:
+      version:
+        description: "Calculated version of the build"
+        value: ${{jobs.build.outputs.version}}
 
 jobs:
   build:
