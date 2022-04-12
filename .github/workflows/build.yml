@@ -5,7 +5,9 @@ on:
       version:
         description: "Calculated version of the build"
         value: ${{jobs.build.outputs.version}}
-        versionExists: ${{jobs.build.outputs.skipped}}
+      versionExists: 
+        description: "If this run should create a new version"
+        value: ${{jobs.build.outputs.skipped}}
 
 jobs:
   build:
