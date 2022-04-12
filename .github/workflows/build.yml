@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.generate-version.outputs.version }}
-      versionExists: ${{ steps.generate-version.outputs.skipped }}
+      versionExists: (${{steps.generate-version.outputs.skipped}} == 'false')
     steps:
       - uses: actions/checkout@v3
         with:
@@ -39,7 +39,7 @@ jobs:
           skip-on-empty: true
 
       - name: apply version
-        if: (!steps.generate-version.outputs.skipped)
+        if: (steps.generate-version.outputs.skipped == 'false')
         run: |
           sed -i 's/"version": ".*",/"version": "${{ env.VERSION }}",/' ./package.json
           sed -i 's/"version": ".*",/"version": "${{ env.VERSION }}",/' ./app/package.json
