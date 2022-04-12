@@ -1,0 +1,15 @@
+{
+  "name": "release-flow",
+  "version": "1.0.0",
+  "description": "Example release flow",
+  "main": "index.js",
+  "repository": "git@github.com:dancook-socialive/release-flow.git",
+  "author": "Dan Cook <dancook-socialive@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "mkdir ./dist && find ./ -maxdepth 1 -type f | xargs -I {} cp {} ./dist",
+    "prebuild": "yarn run clean",
+    "clean": "rm -rf ./dist"
+  }
+}
