@@ -28,7 +28,10 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Conventional Changelog Action
+      - name: Validate commit message
+        uses: wagoid/commitlint-github-action@v4
+
+      - name: Genreate Version and Changelog
         id: generate-version
         uses: TriPSs/conventional-changelog-action@v3
         with:
