@@ -50,8 +50,9 @@ jobs:
         run: yarn run build
 
       - name: Create zip
+        working-directory: ./dist
         run: |
-          zip -r ./deploy.zip ./dist/*
+          zip -r ./deploy.zip ./*
 
       - name: Package artifact
         uses: actions/upload-artifact@v2
@@ -59,4 +60,3 @@ jobs:
           name: package
           path: |
             ./dist/*
-            ./deploy.zip
